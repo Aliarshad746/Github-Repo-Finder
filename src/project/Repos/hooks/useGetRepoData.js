@@ -16,7 +16,6 @@ const useGetReposData = () => {
             q: q || undefined,
             page: rest?.page,
             sort: rest?.sort || undefined,
-            order: rest?.order || undefined,
             per_page: DEFAULT_PAGE_LIMIT,
         }
 
