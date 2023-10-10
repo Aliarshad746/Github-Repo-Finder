@@ -1,0 +1,35 @@
+.container{
+    margin-block: 30px;
+    width: 40%;
+}
+
+.text{
+    font-size: 24px;
+    text-align: center;
+    color: #888FD1
+}
+
+@media only screen and (max-width: 600px){
+    .container{
+    width: 95%;
+    }
+}
+
+@media only screen and (min-width: 600px){
+    .container{
+    width: 75%;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .container{
+    width: 55%;
+    }
+}
+
+@media only screen and (min-width: 900px){
+    .container{
+    width: 40%;
+    }
+}
+
