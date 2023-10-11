@@ -24,8 +24,8 @@ function Card({cardItem = {}}) {
                 </div>)}
             </div>
             <div className={styles.other_container}>
-                <div className={styles.language}>{cardItem?.language}</div>
-                &#183; <div>&#9734; {cardItem?.stargazers_count}</div>
+                {cardItem?.language ? <><div className={styles.language}>{cardItem?.language}</div> &#183;</> : null} 
+                 <div>&#9734; {cardItem?.stargazers_count}</div>
                 &#183; <div>{getFormattedDate(cardItem?.updated_at)}</div>
             </div>
             <div className={styles.details_container}>
