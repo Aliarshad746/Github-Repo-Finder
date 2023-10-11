@@ -26,6 +26,8 @@
 .repo_name{
     color: #828282;
     font-size: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .repo_name:hover{

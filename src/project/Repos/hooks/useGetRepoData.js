@@ -1,5 +1,17 @@
 import {useState, useEffect, useRef} from "react"
-import { DEFAULT_PAGE, DEFAULT_PAGE_LIMIT } from "../utils/contants";
+import { BACKEND_SORT_OPTIONS, DEFAULT_PAGE, DEFAULT_PAGE_LIMIT } from "../utils/contants";
+
+ const formatData = (resp_data, sort, order = 'desc') => {
+    if(sort !== 'created_at'){
+        resp_data?.items?.sort((a,b) => order === 'desc' ? b[sort] - a[sort] : a[sort] - b[sort])
+    }else{
+        resp_data?.items?.sort((a,b) => {
+            const timeFirst = new Date(a[sort]).getTime();
+            const secondTime = new Date(b[sort]).getTime();
+            return order === 'desc'? secondTime - timeFirst : timeFirst - secondTime;
+        })
+    }
+ }
 
 const useGetReposData = () => {
     const [filters, setFilters] = useState({page: DEFAULT_PAGE});
@@ -15,7 +27,8 @@ const useGetReposData = () => {
         const params = {
             q: q || undefined,
             page: rest?.page,
-            sort: rest?.sort || undefined,
+            order: rest?.order || undefined,
+            sort: (rest?.sort && BACKEND_SORT_OPTIONS.includes(rest.sort)) ? rest?.sort : undefined, // because backend has only 4 sort, options So doing sorting on frontend
             per_page: DEFAULT_PAGE_LIMIT,
         }
 
@@ -32,6 +45,9 @@ const useGetReposData = () => {
             const res = await fetch(`https://api.github.com/search/repositories?${paramsString}`)
             if(res?.ok){
                 const resp_data = await res.json();
+                if(rest?.sort && !BACKEND_SORT_OPTIONS.includes(rest?.sort)){
+                    formatData(resp_data, rest?.sort, rest?.order);
+                }
                 setData(resp_data)
             }else{
                 setData({});

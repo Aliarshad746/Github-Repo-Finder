@@ -1,5 +1,6 @@
 "use client";
 import CardList from "./components/CardList";
+import Toggle from "./components/Toggle";
 import useGetReposData from "./hooks/useGetRepoData"
 import styles from "./styles.module.css"
 import {OPTIONS, DEFAULT_PAGE} from "./utils/contants"
@@ -25,7 +26,8 @@ function Repos() {
           onChange={(e) => setFilters(
             (prev)=> ({...prev, 
             page: DEFAULT_PAGE, 
-            sort: e.target.value
+            sort: e.target.value,
+            order: prev?.order ? 'desc' : undefined,
             }))} 
             value={filters?.sort}
             >
@@ -37,7 +39,6 @@ function Repos() {
             </option>)}
           </select>
       </div>
-
         <CardList 
         data={data} 
         loading={loading} 
