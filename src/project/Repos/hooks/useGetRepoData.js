@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef} from "react"
-import { BACKEND_SORT_OPTIONS, DEFAULT_PAGE, DEFAULT_PAGE_LIMIT } from "../utils/contants";
+import { BACKEND_SORT_OPTIONS, DEFAULT_PAGE, DEFAULT_PAGE_LIMIT, GITHUB_REPO_API } from "../utils/contants";
 
  const formatData = (resp_data, sort, order = 'desc') => {
     if(sort !== 'created_at'){
@@ -42,7 +42,7 @@ const useGetReposData = () => {
         }, '')
 
         try {
-            const res = await fetch(`https://api.github.com/search/repositories?${paramsString}`)
+            const res = await fetch(`${GITHUB_REPO_API}?${paramsString}`)
             if(res?.ok){
                 const resp_data = await res.json();
                 if(rest?.sort && !BACKEND_SORT_OPTIONS.includes(rest?.sort)){

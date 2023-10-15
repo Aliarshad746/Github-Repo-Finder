@@ -1,3 +1,5 @@
+export const GITHUB_REPO_API = 'https://api.github.com/search/repositories'
+
 export const MONTHS = [
     'Jan', 'Feb', 'Mar', 'Apr',
     'May', 'Jun', 'Jul', 'Aug',
